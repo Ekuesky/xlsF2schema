@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xlsF2schema"
+version = "0.1.0"
+authors = [{name = "AYIEK SKY", email = "ayiekue@outlook.com"}]
+description = "Un convertisseur robuste de XLSForm vers JSON Schema"
+requires-python = ">=3.8"
+dependencies = [
+    "pandas",
+    "jsonschema"
+]
+
+[project.scripts]
+xlsF2schema = "xlsF2schema.cli:main"
