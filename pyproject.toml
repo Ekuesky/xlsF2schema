@@ -7,10 +7,40 @@ name = "xlsF2schema"
 version = "0.1.0"
 authors = [{name = "AYIEK SKY", email = "ayiekue@outlook.com"}]
 description = "Un convertisseur robuste de XLSForm vers JSON Schema"
+readme = "README.md"
+license = {text = "MIT"}
 requires-python = ">=3.8"
+keywords = ["xlsform", "json-schema", "odk", "kobo", "survey", "conversion"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 dependencies = [
-    "pandas",
-    "jsonschema"
+    "pandas>=2.0.0",
+    "jsonschema>=4.0.0",
+    "pyxform>=2.0.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/ekuesky/xlsF2schema"
+Repository = "https://github.com/ekuesky/xlsF2schema"
+Issues = "https://github.com/ekuesky/xlsF2schema/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0"
 ]
 
 [project.scripts]
