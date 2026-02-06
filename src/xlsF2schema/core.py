@@ -1,6 +1,5 @@
 from .mapping import get_comprehensive_mapping
 
-
 def generate_json_schema(xlsform_dict_data:dict):
     """
     Génère un JSON Schema à partir d'un dictionnaire XLSForm (pyxform).
@@ -8,6 +7,7 @@ def generate_json_schema(xlsform_dict_data:dict):
     survey_tab = xlsform_dict_data.get("children", [])
     choices_tab = xlsform_dict_data.get("choices", {})
 
+    # Dictionnaire schema qui va accueillir les propriétés et les champs extraits de xlsform_dict_data
     schema = {
         "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
@@ -22,7 +22,7 @@ def generate_json_schema(xlsform_dict_data:dict):
             }
         }
     }
-    
+    # Endroits du dict schema où ajouter les propriétés et les champs obligatoires extraits de xlsform_dict_data
     target_properties = schema["properties"]["value"]["items"]["properties"]
     target_required = schema["properties"]["value"]["items"]["required"]
 
@@ -93,9 +93,10 @@ def generate_json_schema(xlsform_dict_data:dict):
                 # Field mapping
                 field_schema = get_comprehensive_mapping(item, choices_tab)
                 is_required = str(item.get("bind", {}).get("required")).lower() in ["yes", "true"]
-                #TODO à ajouter
-                has_relevant = item.get("bind", {}).get("relevant") is not None
 
+                #Todo à traiter
+                relevant = item.get("bind", {}).get("relevant")
+                constraint = item.get("bind", {}).get("constraint")
 
                 # Autoriser null pour que les champs non obligatoires correspondent aux ensembles de données en utilisant des valeurs nulles explicites
                 if not is_required:

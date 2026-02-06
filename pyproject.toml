@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=77.0.3"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "xlsF2schema"
-version = "0.1.0"
+version = "1.0.0"
 authors = [{name = "AYIEK SKY", email = "ayiekue@outlook.com"}]
 description = "Un convertisseur robuste de XLSForm vers JSON Schema"
 readme = "README.md"

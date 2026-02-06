@@ -1,6 +1,5 @@
 import json
 from src.xlsF2schema.core import generate_json_schema
-
 # Mock survey_dict basé sur l'exemple JSON fourni et la structure XLSForm
 survey_dict = {
     "children": [
