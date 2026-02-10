@@ -60,7 +60,7 @@ def generate_json_schema(xlsform_dict_data:dict):
             if not name:
                 continue
 
-            if item_type == "group":
+            if item_type == "group": #group mapping
                 sub_props = {}
                 sub_required = []
                 properties_dict[name] = {
@@ -68,12 +68,16 @@ def generate_json_schema(xlsform_dict_data:dict):
                     "properties": sub_props,
                     "required": sub_required
                 }
+                label = item.get("label")
+                if label:
+                    properties_dict[name]["x-label"] = label
+
                 if "children" in item:
                     process_items(item["children"], sub_props, sub_required)
                 if not sub_required:
                     properties_dict[name].pop("required")
 
-            elif item_type == "repeat":
+            elif item_type == "repeat": #repeat mapping
                 sub_props = {}
                 sub_required = []
                 properties_dict[name] = {
@@ -84,6 +88,10 @@ def generate_json_schema(xlsform_dict_data:dict):
                         "required": sub_required
                     }
                 }
+                label = item.get("label")
+                if label:
+                    properties_dict[name]["x-label"] = label
+
                 if "children" in item:
                     process_items(item["children"], sub_props, sub_required)
                 if not sub_required:
@@ -93,10 +101,23 @@ def generate_json_schema(xlsform_dict_data:dict):
                 # Field mapping
                 field_schema = get_comprehensive_mapping(item, choices_tab)
                 is_required = str(item.get("bind", {}).get("required")).lower() in ["yes", "true"]
+                
+                label = item.get("label")
+                if label:
+                    field_schema["x-label"] = label
 
-                #Todo à traiter
                 relevant = item.get("bind", {}).get("relevant")
+                if relevant:
+                    field_schema["x-relevant"] = relevant
+
                 constraint = item.get("bind", {}).get("constraint")
+                if constraint:
+                    field_schema["x-constraint"] = constraint
+
+                readonly = item.get("bind", {}).get("readonly")
+                if readonly:
+                    field_schema["x-readOnly"] = str(readonly).lower() in ["yes", "true"]
+
 
                 # Autoriser null pour que les champs non obligatoires correspondent aux ensembles de données en utilisant des valeurs nulles explicites
                 if not is_required:

@@ -29,6 +29,7 @@ def test_generate_json_schema_basic():
     }
 
     schema = generate_json_schema(xlsform_data)
+    print(json.dumps(schema, indent=4))
 
     assert schema["$schema"] == "http://json-schema.org/draft-07/schema#"
     assert schema["type"] == "object"
@@ -180,13 +181,14 @@ def test_generate_json_schema_with_choices():
         ],
         "choices": {
             "genres": [
-                {"name": "homme", "label": "Homme"},
-                {"name": "femme", "label": "Femme"}
+                {"name": "homme", "label": {"fr": "Homme", "en": "Male"}},
+                {"name": "femme", "label": {"fr": "Femme", "en": "Female"}}
             ]
         }
     }
 
     schema = generate_json_schema(xlsform_data)
+    print(json.dumps(schema, indent=4))
     items = schema["properties"]["value"]["items"]
 
     assert "genre" in items["properties"]
