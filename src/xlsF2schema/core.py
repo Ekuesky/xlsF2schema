@@ -116,7 +116,7 @@ def generate_json_schema(xlsform_dict_data:dict):
 
                 readonly = item.get("bind", {}).get("readonly")
                 if readonly:
-                    field_schema["x-readOnly"] = str(readonly).lower() in ["yes", "true"]
+                    field_schema["readOnly"] = str(readonly).lower() in ["yes", "true"]
 
 
                 # Autoriser null pour que les champs non obligatoires correspondent aux ensembles de données en utilisant des valeurs nulles explicites
